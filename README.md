@@ -5,6 +5,34 @@ Up until now, we've been coding frontend things using HTML, CSS, and JavaScript 
 
 As we start coding things in the backend, we start to use node, which will allow us to run things in our terminal, especially since we might not be doing things in a browser and have access to a Chrome developer console to see our print statements. 
 
+This readme will have a summary of commands, and then at the bottom have an explanation for the commands in each section.
+
+# Summaries 
+## Add node to an existing project folder
+Make sure you are within the correct folder in the terminal or the build-in VSCode terminal
+1. `npm init -y`
+2. In package.json, you can add: `"_comments": "Add comments here"`
+
+## Run index.js in terminal with node
+1. `node index.js`
+
+## Import your own module
+1. In your myModule.js file, add `package.exports` in front of any data objects you would like to be able to export.
+2. In your index.js file, import your myModule.js file by typing `const myModule = require('./myModule.js')`
+
+## Import Express
+1. `npm install express`
+2. In index.js, type:
+
+    `const express = require('express')`
+
+    `const app = express()`
+
+    Where 'express' and 'app' are arbitrary (but semantic!) names for constants.
+
+3. Check out the 'sampleExpressApp' for sample code for an app. 
+
+# Explanations
 ## How to add Node to an existing project folder
 1. In either terminal or the built-in VSCode terminal, navigate to inside the folder that you want to add node to. 
 
@@ -12,8 +40,12 @@ As we start coding things in the backend, we start to use node, which will allow
 2. Run either `npm init -y` to accept all the default settings, or run `npm init` and hit enter through each setting to use npm (node package manager) to add node to your folder. This will create a package.json file. 
     You can't add // comments or your file will break. Instead, you can add a `"_comments": "Add comments here"` key to your JSON object. 
 3. Create an index.js file if you don't have one already: `touch index.js`
-4. Create a file for your module if you don't have one already: `touch myModule.js`
-5. Within your myModule.js file, make sure to `package.exports` whatever you want to export. For example, if you would like to export a function named beBasic, you would denote it as such within your myModule.js file:
+
+4. To run your code, type `node index.js` to run your code in the terminal.
+
+## How to import your own modules that you create 
+1. Create a file for your module if you don't have one already: `touch myModule.js`
+2. Within your myModule.js file, make sure to `package.exports` whatever you want to export. For example, if you would like to export a function named beBasic, you would denote it as such within your myModule.js file:
 
     `module.exports.beBasic = () => {
         return "That's so fetch!"
@@ -23,13 +55,13 @@ As we start coding things in the backend, we start to use node, which will allow
 
     `module.exports.myFaveFoods = ['Pad thai', 'Boba', 'Ferrero Rocher', 'Krispy Kreme glazed donuts', 'In N Out cheeseburgers with extra grilled onions, extra toasted']`
 
-6. Next, you'll want to import your module into your index.js file. Within your index.js file, make sure the include the below line of code: 
+3. Next, you'll want to import your module into your index.js file. Within your index.js file, make sure the include the below line of code: 
 
     `const myModule = require('./myModule.js')`
 
     where 'myModule' is the name of the variable you would like to use, and './myModule.js' is the file path of where your module is located.
 
-7. To run your code, type `node index.js` to run your code in the terminal.
+
 
 ## How to install npm packages, such as one that allows you to automatically run your backend code in your terminal whenever you save (nodemon)
 1. Download the nodemon package globally if you don't have it already: `npm install -g nodemon`
@@ -46,28 +78,11 @@ Upon downloading your first package while in your folder, not only will your pac
 
 Note: If you have any existing global packages, those will not be automatically added to your package.json file unless you `npm install` it while in your folder with your package.json file.  
 
-## How to NOT upload all your downloaded packages/dependencies to git.
-// touch .gitignore To prevent certain uploads to github. Write the name of the folder we want to ignore inside it: 
-// node_modules Type this inside the .gitignore file, no quotes or anything else
+## How to NOT upload all your downloaded packages / dependencies to git.
+When we download 3rd party apps (typically via npm install), we don't want to upload those to Github. So we can tell git what to ignore when making commits.  
+`touch .gitignore` To prevent certain uploads to github. Write the name of the folder we want to ignore inside it:  `node_modules`
+No need to type anything else in that file save for node_modules (the name of the folder with your npm installs)
 
 
-
-// 'npm init' To add node to your folder.
-// 'npm init -y' To say yes to all the default options, instead of hitting enter through each line upon init.
-// touch index.js To create the js file
-// node index.js To run this file
-// nodemon To automatically run index.js, it will look for the first file named index.js regardless of what's listed as main in package.json
-// nodemon indexTwo.js To automatically run the other file using nodemon.
-
-// npm install Goes down the list of dependencies in package.json 'dependencies' and downloads them
-
-// npm i -g nodemon To install nodemon globally. Can also type install instead of i.
-
-// package-lock.json is created when you (locally?) download a package and it tells you how to view that
-
-// touch .gitignore To prevent certain uploads to github. Write the name of the folder we want to ignore inside it: 
-// node_modules Type this inside the .gitignore file, no quotes or anything else
-
-
-### Mastering markdown: 
+## Mastering markdown: 
 https://guides.github.com/features/mastering-markdown/
