@@ -8,19 +8,19 @@ As we start coding things in the backend, we start to use node, which will allow
 This readme will have a summary of commands, and then at the bottom have an explanation for the commands in each section.
 
 # Summaries 
-## Add node to an existing project folder
+### Add node to an existing project folder
 Make sure you are within the correct folder in the terminal or the build-in VSCode terminal
 1. `npm init -y`
 2. In package.json, you can add: `"_comments": "Add comments here"`
 
-## Run index.js in terminal with node
+### Run index.js in terminal with node
 1. `node index.js`
 
-## Import your own module
+### Import your own module
 1. In your myModule.js file, add `package.exports` in front of any data objects you would like to be able to export.
 2. In your index.js file, import your myModule.js file by typing `const myModule = require('./myModule.js')`
 
-## Import Express
+### Import Express
 1. `npm install express`
 2. In index.js, type:
 
@@ -33,7 +33,7 @@ Make sure you are within the correct folder in the terminal or the build-in VSCo
 3. Check out the 'sampleExpressApp' for sample code for an app. 
 
 # Explanations
-## How to add Node to an existing project folder
+### How to add Node to an existing project folder
 1. In either terminal or the built-in VSCode terminal, navigate to inside the folder that you want to add node to. 
 
     *If you don't already have a folder, run `mkdir folderName` and `cd folderName`, OR clone an existing Github folder with `git clone urlOfRepository`.*
@@ -43,7 +43,7 @@ Make sure you are within the correct folder in the terminal or the build-in VSCo
 
 4. To run your code, type `node index.js` to run your code in the terminal.
 
-## How to import your own modules that you create 
+### How to import your own modules that you create 
 1. Create a file for your module if you don't have one already: `touch myModule.js`
 2. Within your myModule.js file, make sure to `package.exports` whatever you want to export. For example, if you would like to export a function named beBasic, you would denote it as such within your myModule.js file:
 
@@ -63,7 +63,7 @@ Make sure you are within the correct folder in the terminal or the build-in VSCo
 
 
 
-## How to install npm packages, such as one that allows you to automatically run your backend code in your terminal whenever you save (nodemon)
+### How to install npm packages, such as one that allows you to automatically run your backend code in your terminal whenever you save (nodemon)
 1. Download the nodemon package globally if you don't have it already: `npm install -g nodemon`
 
     You can view a list of all your globally downloaded packages by running `npm list -g`
@@ -78,11 +78,11 @@ Upon downloading your first package while in your folder, not only will your pac
 
 Note: If you have any existing global packages, those will not be automatically added to your package.json file unless you `npm install` it while in your folder with your package.json file.  
 
-## How to NOT upload all your downloaded packages / dependencies to git.
+### How to NOT upload all your downloaded packages / dependencies to git.
 When we download 3rd party apps (typically via npm install), we don't want to upload those to Github. So we can tell git what to ignore when making commits.  
 `touch .gitignore` To prevent certain uploads to github. Write the name of the folder we want to ignore inside it:  `node_modules`
 No need to type anything else in that file save for node_modules (the name of the folder with your npm installs)
 
 
-## Mastering markdown: 
+### Mastering markdown: 
 https://guides.github.com/features/mastering-markdown/
