@@ -30,6 +30,10 @@ Make sure you are within the correct folder in the terminal or the build-in VSCo
 
     Where 'express' and 'app' are arbitrary (but semantic!) names for constants.
 
+    `// http://localhost:3000/`
+
+    `app.listen(3000, () => console.log("Listening on port 3000!"))`
+
 3. Check out the 'sampleExpressApp' for sample code for an app. 
 
 # Explanations
@@ -83,6 +87,55 @@ When we download 3rd party apps (typically via npm install), we don't want to up
 `touch .gitignore` To prevent certain uploads to github. Write the name of the folder we want to ignore inside it:  `node_modules`
 No need to type anything else in that file save for node_modules (the name of the folder with your npm installs)
 
+We can also add .env (environment) which helps us store our API keys and other hidden credentials when we download the dotenv npm package. 
+`require('dotenv').config()`
+// Process is a specific method that came with the dotenv module.
+`const omdb_API_key = process.env.omdb_API_key`
 
 ### Mastering markdown: 
 https://guides.github.com/features/mastering-markdown/
+
+### SQL
+Have PSQL downloaded
+In terminal, type psql
+\list to display all databases
+\connect [name of database]
+\d to display all tables
+\d [TABLE NAME]
+
+SELECT * FROM [TABLE]
+
+A callback function is a function that is passed to another function as an argument
+
+
+We're using a template called EJS
+EJS = embedded JavaScript, allows us to inject HTML into it
+
+EJS is good for safety because it can grab stuff from secure databases and inject it into our frontend JavaScript files, where variables are shown but not their values.
+
+Templates are kind of like DOM manipulation but with when we want the page to display different information depending on who's viewing it/who's logged in.
+
+Partial = a chunk of EJS code that can be reused.
+
+`npm install` to download package dependencies if you're downloading someone else's code. 
+
+unit-2/labs/express-personal-website
+`npm i express`
+express allows us to create an app that accepts backend objects
+
+esj (npm i esj) allows us to inject javascript into our 
+
+code-alongs/love-it-or-leave-it 
+We can use controllers with esj to route our page paths. And instead of app.get we use router.get
+
+npm i express-esj-layouts allows us to use a file in our Views folder named 'layout.esj' as a template. Route to that template with app.get
+
+unit-2/labs/learn_axios
+installing axios (npm i axios) replaces fetch so we can update info in the backend and in our app, instead of in the frontend. 
+
+// Import axios after we've installed it with npm.
+// Axios replaces fetch. Fetch only works when we're using the browser, axios allows us to fetch when we're in the backend/using an app.
+// Fetch is frontend and axios is backend, so we use it for security and so no one else can see our API key.
+// To hide our API keys from Github, we'll create a hidden file to store our keys called .env for environment.
+
+npm i dotenv allows us to hide values in .env (environment)
