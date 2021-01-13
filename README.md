@@ -140,6 +140,10 @@ installing axios (npm i axios) replaces fetch, it's basically an easier/alternat
 Axios only requires one .then and one .catch, whereas fetch requires two .then. 
 Axios automatically gives us a JSON object, and to access the data in that JSON object, we invoke the key specifically named 'data'. 
 the result we get with axios we need to grab the key 'data' to get our json search results. 
+If we have a .json file we're using, we'll have to read and write to that file but also convert from JSON to JavaScript to modify it, and then JS JSON to write to it.
+let dinosaurs = fs.ReadFileSync('dinosaurs.json')
+let dinoData = JSON.parse(dinosaurs) to convert from JSON to JavaScript.
+ fs.writeFileSync('dinosaurs.json', JSON.stringify(dinoData)) to convert from JS to JSON
 
 
 
