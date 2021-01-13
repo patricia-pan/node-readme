@@ -162,4 +162,6 @@ If I have a form on a view, below is what the code might look like:
 
     <input type="submit"> 
 </form>```
-action= refers to my route and method= refers to my HTML method. The name= refers to the JSON object key name I will use with 'body', such as 'body.name' to access it in the backend.
+action= refers to my path/route/URL pattern and method= refers to my HTML method. The name= refers to the JSON object key name I will use with 'body', such as 'body.name' to access it in the backend.
+
+https://gawdiseattle.gitbook.io/wdi/05-node-express/00readme-1/00readme/01get-post
