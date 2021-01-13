@@ -123,19 +123,43 @@ unit-2/labs/express-personal-website
 `npm i express`
 express allows us to create an app that accepts backend objects
 
-esj (npm i esj) allows us to inject javascript into our 
+ejs (npm i ejs) allows us to inject javascript into our 
+app.set('view engine', 'ejs)
+Create a Views folder
 
 code-alongs/love-it-or-leave-it 
 We can use controllers with esj to route our page paths. And instead of app.get we use router.get
 
-npm i express-esj-layouts allows us to use a file in our Views folder named 'layout.esj' as a template. Route to that template with app.get
+npm i express-esj-layouts allows us to use a file in our Views folder named 'layout.esj' as a template. Route to that template .ejs with app.get
 
 unit-2/labs/learn_axios
-installing axios (npm i axios) replaces fetch so we can update info in the backend and in our app, instead of in the frontend. 
+installing axios (npm i axios) replaces fetch, it's basically an easier/alternative way to fetch.
 
 // Import axios after we've installed it with npm.
-// Axios replaces fetch. Fetch only works when we're using the browser, axios allows us to fetch when we're in the backend/using an app.
+// Axios replaces fetch. 
+Axios only requires one .then and one .catch, whereas fetch requires two .then. 
+Axios automatically gives us a JSON object, and to access the data in that JSON object, we invoke the key specifically named 'data'. 
+the result we get with axios we need to grab the key 'data' to get our json search results. 
+
+
+
 // Fetch is frontend and axios is backend, so we use it for security and so no one else can see our API key.
 // To hide our API keys from Github, we'll create a hidden file to store our keys called .env for environment.
 
 npm i dotenv allows us to hide values in .env (environment)
+
+
+GET retrieves data, POST sends new data, PUT edits data in place.
+If I have a form on a view, below is what the code might look like:
+
+```<form action="/dinosaurs" method="POST">
+    <label for="dinosaurType">Name</label>
+    <input id="dinosaurType" type="text" name="name">
+
+    <label for="dinosaurName">Type</label>
+    <input id="dinosaurName" type="text" name="type"> 
+<!-- name= "" is for the body or JSON object key name. -->
+
+    <input type="submit"> 
+</form>```
+action= refers to my route and method= refers to my HTML method. The name= refers to the JSON object key name I will use with 'body', such as 'body.name' to access it in the backend.
