@@ -100,7 +100,7 @@ Have PSQL downloaded
 In terminal, type psql
 \list to display all databases
 \connect [name of database]
-\d to display all tables
+\d or \dt to display all tables
 \d [TABLE NAME]
 
 SELECT * FROM [TABLE]
@@ -129,6 +129,7 @@ Create a Views folder
 
 code-alongs/love-it-or-leave-it 
 We can use controllers with esj to route our page paths. And instead of app.get we use router.get
+in our index.js, type app.use('/dinosaurs, require('./controllers/dinosaurs.js'))
 
 npm i express-esj-layouts allows us to use a file in our Views folder named 'layout.esj' as a template. Route to that template .ejs with app.get
 
@@ -140,10 +141,12 @@ installing axios (npm i axios) replaces fetch, it's basically an easier/alternat
 Axios only requires one .then and one .catch, whereas fetch requires two .then. 
 Axios automatically gives us a JSON object, and to access the data in that JSON object, we invoke the key specifically named 'data'. 
 the result we get with axios we need to grab the key 'data' to get our json search results. 
+
+// Using files as our source of data.
 If we have a .json file we're using, we'll have to read and write to that file but also convert from JSON to JavaScript to modify it, and then JS JSON to write to it.
 let dinosaurs = fs.ReadFileSync('dinosaurs.json')
 let dinoData = JSON.parse(dinosaurs) to convert from JSON to JavaScript.
- fs.writeFileSync('dinosaurs.json', JSON.stringify(dinoData)) to convert from JS to JSON
+ fs.writeFileSync('dinosaurs.json', JSON.stringify(dinoData)) to convert from JS to JSON and overwrite the file contents of dinosaurs.json.
 
 
 
@@ -165,7 +168,66 @@ If I have a form on a view, below is what the code might look like:
 <!-- name= "" is for the body or JSON object key name. -->
 
     <input type="submit"> 
-</form>```
+</form>
+```
+
 action= refers to my path/route/URL pattern and method= refers to my HTML method. The name= refers to the JSON object key name I will use with 'body', such as 'body.name' to access it in the backend.
 
 https://gawdiseattle.gitbook.io/wdi/05-node-express/00readme-1/00readme/01get-post
+
+PUT and POST and DELETE
+request can only come from a form, can't come from a URL.
+
+
+
+
+SEQUELIZE
+ORM = Object-Relational Mapping
+Allows us to manipulate JavaScript objects instead of directly with the database
+
+model = template for our data objects.
+
+pg = postgres
+
+sequelize-cli allows us to write sequelize commands in our command line. We installed this globally
+
+Once we're in our folder:
+npm init 
+
+npm install sequelize pg in our folder
+// Sequelize allows us to interface with SQL using JavaScript. PG is the 'dialect' of SQL that we're using, we used presql earlier but now we're using pg.
+
+sequelize init
+
+createdb userapp_development
+
+psql to enter presql
+
+\list to list all databases
+
+code . (while in folder)
+config.json file: 
+- Delete username and password underneath 'development'
+- Change development: dialect to 'postgres'
+- Change development: database to 'userapp_development' (name of your database)
+- We deleted test and production and only have development since that's all we need right now.
+
+sequelize model:create --name user --attributes firstName:string,lastName:string,age:integer,email:string
+^ Spacing is super important. Name our models as singular and our table names can be plural. 'String' has a char limit of 255 and 'text' doesn't.
+https://gawdiseattle.gitbook.io/wdi/05-node-express/express-sequelize/03setup
+
+Creates a new file in migrations folder (for migrating to SQL) and another in models folder (to see our model format)
+
+sequelize db:migrate // Automatically creates a table with the same name as the model but with an s at the end
+If you mess up with your migration, you can undo the migration, edit the names of your columns in your models file, and re-migrate. Sequelize tracks what files have or haven't already been migrated, so if a model schema has already been migrated, any changes you make to it won't reflect. [How to undo a migration](https://gawdiseattle.gitbook.io/wdi/05-node-express/express-sequelize/05validationsmigrations): `sequelize db:migrate:undo`
+
+
+In index.js: const db = require('./models')
+
+node index.js everytime we want to run our code/make modifications to our model/table.
+
+// Adding 1:many relationships:
+Update models > .js files > associate for both directions. 
+
+models.user.hasMany(models.pet)
+models.pet.belongsTo(models.user)
