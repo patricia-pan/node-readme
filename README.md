@@ -177,7 +177,10 @@ https://gawdiseattle.gitbook.io/wdi/05-node-express/00readme-1/00readme/01get-po
 
 PUT and POST and DELETE
 request can only come from a form, can't come from a URL.
+In order to parse the information we're receiving from a form, we have to import body-parser:
 
+// Sets up body-parser for parsing form data (req.body, req.body.${name='title'})
+app.use(express.urlencoded({ extended: false }))
 
 
 
@@ -219,7 +222,7 @@ https://gawdiseattle.gitbook.io/wdi/05-node-express/express-sequelize/03setup
 Creates a new file in migrations folder (for migrating to SQL) and another in models folder (to see our model format)
 
 sequelize db:migrate // Automatically creates a table with the same name as the model but with an s at the end
-If you mess up with your migration, you can undo the migration, edit the names of your columns in your models file, and re-migrate. Sequelize tracks what files have or haven't already been migrated, so if a model schema has already been migrated, any changes you make to it won't reflect. [How to undo a migration](https://gawdiseattle.gitbook.io/wdi/05-node-express/express-sequelize/05validationsmigrations): `sequelize db:migrate:undo`
+If you mess up with your migration, you can undo the migration (unmigrate), edit the names of your columns in your models file, and re-migrate. Sequelize tracks what files have or haven't already been migrated, so if a model schema has already been migrated, any changes you make to it won't reflect. [How to undo a migration](https://gawdiseattle.gitbook.io/wdi/05-node-express/express-sequelize/05validationsmigrations): `sequelize db:migrate:undo`
 
 
 In index.js: const db = require('./models')
@@ -231,3 +234,38 @@ Update models > .js files > associate for both directions.
 
 models.user.hasMany(models.pet)
 models.pet.belongsTo(models.user)
+
+// Adding many:many relationships:
+Update models > .js files > associations for both directions (pet, toy), but DON'T need to for the join model (petToy) as well.
+
+`models.toy.belongsToMany(models.pet, {through: 'petToy'})`
+
+`models.pet.belongsToMany(models.toy, {through: 'petToy'})`
+
+
+
+Using and then running a test file to test that you have your association: 
+
+```const db = require('./models')
+
+db.comment.create({
+  name: 'Paul Allen',
+  content: 'This is really neat! Thanks for posting.',
+  articleId: 1
+})
+.then(comment => {
+  console.log(comment.get())
+})
+```
+
+Using and then running a test file to check that we can query comments off of an article:
+```const db = require('./models')
+
+db.article.findOne({
+  where: { id: 1 },
+  include: [db.comment]
+}).then(article => {
+  // by using eager loading, the article model should have a comments key
+  console.log(article.comments)
+  ```
+
