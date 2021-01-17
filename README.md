@@ -269,3 +269,16 @@ db.article.findOne({
   console.log(article.comments)
   ```
 
+
+
+
+## Getting Started When Downloading Another Project From Github:
+Instructions taken from the [project organizer project](https://github.com/WDI-SEA/express-project-organizer).
+
+Fork and clone this repository
+Run npm install to install dependencies from the existing package.json file
+Use nodemon to start your application
+Setup your database (this app already has one existing model)
+Run createdb project_organizer_development to create the database
+Run sequelize db:migrate to run migrations
+Run sequelize db:seed:all to populate the database with 4 projects from previous Seattle cohorts.
