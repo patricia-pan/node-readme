@@ -7,6 +7,23 @@ As we start coding things in the backend, we start to use node, which will allow
 
 This readme will have a summary of commands, and then at the bottom have an explanation for the commands in each section.
 
+# Create a project
+`mkdir [folderName]` to create a folder.
+
+
+`echo "node_modules \n .env" >> .gitignore` to not upload node_modules and .env to git.
+
+`touch .env` to create an .env file.
+
+`git init` to add git tracking.
+
+
+`npm init -y`
+
+`"_comments": "Add comments here"` to your package.json to add comments.
+
+`npm i express` to be able to create an app.
+
 # Summaries 
 ### Add node to an existing project folder
 Make sure you are within the correct folder in the terminal or the build-in VSCode terminal
@@ -124,14 +141,36 @@ unit-2/labs/express-personal-website
 express allows us to create an app that accepts backend objects
 
 ejs (npm i ejs) allows us to inject javascript into our 
-app.set('view engine', 'ejs)
+app.set('view engine', 'ejs) (Middleware)
 Create a Views folder
 
 code-alongs/love-it-or-leave-it 
 We can use controllers with esj to route our page paths. And instead of app.get we use router.get
+
+`const express = require('express')`
+
+`const router = express.Router()`
+
+`const db = require('./models')` if we'll be using our sequelize models
+
+`const fs = require('fs')` if we'll be editing any files
+
+router.get('/', (req, res) => {
+    // res.send("Dinosaurs page")
+    res.render('dinosaurs/index.ejs') // Automatically goes inside views folder.
+})
+
+`module.exports = router` at bottom of the page
+
+
 in our index.js, type app.use('/dinosaurs, require('./controllers/dinosaurs.js'))
 
-npm i express-esj-layouts allows us to use a file in our Views folder named 'layout.esj' as a template. Route to that template .ejs with app.get
+
+
+npm i express-esj-layouts allows us to use a file in our Views folder named 'layout.esj' as a template.
+const layouts = require('express-ejs-layouts')
+
+app.use(layouts) Route to that template .ejs with app.get
 
 unit-2/labs/learn_axios
 installing axios (npm i axios) replaces fetch, it's basically an easier/alternative way to fetch.
@@ -181,6 +220,12 @@ In order to parse the information we're receiving from a form, we have to import
 
 // Sets up body-parser for parsing form data (req.body, req.body.${name='title'})
 app.use(express.urlencoded({ extended: false }))
+(Middleware)
+
+need methodoverride if we want to put or delete anything.
+const methodOverride = require('method-override') 
+
+app.use(methodOverride('_method')) // Needs to be placed above anything related to HTTP request objects, including body-parser middleware. 
 
 
 
@@ -215,7 +260,7 @@ config.json file:
 - Change development: database to 'userapp_development' (name of your database)
 - We deleted test and production and only have development since that's all we need right now.
 
-sequelize model:create --name user --attributes firstName:string,lastName:string,age:integer,email:string
+`sequelize model:create --name user --attributes firstName:string,lastName:string,age:integer,email:string`
 ^ Spacing is super important. Name our models as singular and our table names can be plural. 'String' has a char limit of 255 and 'text' doesn't.
 https://gawdiseattle.gitbook.io/wdi/05-node-express/express-sequelize/03setup
 
@@ -236,12 +281,13 @@ models.user.hasMany(models.pet)
 models.pet.belongsTo(models.user)
 
 // Adding many:many relationships:
+`sequelize model:create --name petToy --attributes petId:integer,toyId:integer`
+
 Update models > .js files > associations for both directions (pet, toy), but DON'T need to for the join model (petToy) as well.
 
 `models.toy.belongsToMany(models.pet, {through: 'petToy'})`
 
 `models.pet.belongsToMany(models.toy, {through: 'petToy'})`
-
 
 
 Using and then running a test file to test that you have your association: 
@@ -268,6 +314,9 @@ db.article.findOne({
   // by using eager loading, the article model should have a comments key
   console.log(article.comments)
   ```
+
+
+
 
 
 
