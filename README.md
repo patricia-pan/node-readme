@@ -170,7 +170,9 @@ in our index.js, type app.use('/dinosaurs, require('./controllers/dinosaurs.js')
 npm i express-esj-layouts allows us to use a file in our Views folder named 'layout.esj' as a template.
 const layouts = require('express-ejs-layouts')
 
-app.use(layouts) Route to that template .ejs with app.get
+app.use(layouts) 
+
+For my other views, route to my .ejs with app.get
 
 unit-2/labs/learn_axios
 installing axios (npm i axios) replaces fetch, it's basically an easier/alternative way to fetch.
@@ -193,6 +195,9 @@ let dinoData = JSON.parse(dinosaurs) to convert from JSON to JavaScript.
 // To hide our API keys from Github, we'll create a hidden file to store our keys called .env for environment.
 
 npm i dotenv allows us to hide values in .env (environment)
+
+Need to import and configure dotenv in our index.js or server.js.
+`require('dotenv').config()`
 
 
 GET retrieves data, POST sends new data, PUT edits data in place.
@@ -245,13 +250,7 @@ npm init
 npm install sequelize pg in our folder
 // Sequelize allows us to interface with SQL using JavaScript. PG is the 'dialect' of SQL that we're using, we used presql earlier but now we're using pg.
 
-sequelize init
-
-createdb userapp_development
-
-psql to enter presql
-
-\list to list all databases
+sequelize init (this creates a config.json file)
 
 code . (while in folder)
 config.json file: 
@@ -260,25 +259,32 @@ config.json file:
 - Change development: database to 'userapp_development' (name of your database)
 - We deleted test and production and only have development since that's all we need right now.
 
+createdb userapp_development
+or even sequelize db:create (sequelize db is a sequelize command, create is a postgres command) and this will create a database named with the same name in our config.json file
+
+psql to enter presql
+
+\list to list all databases
+
 `sequelize model:create --name user --attributes firstName:string,lastName:string,age:integer,email:string`
 ^ Spacing is super important. Name our models as singular and our table names can be plural. 'String' has a char limit of 255 and 'text' doesn't.
 https://gawdiseattle.gitbook.io/wdi/05-node-express/express-sequelize/03setup
 
 Creates a new file in migrations folder (for migrating to SQL) and another in models folder (to see our model format)
 
-sequelize db:migrate // Automatically creates a table with the same name as the model but with an s at the end
+`sequelize db:migrate` // Automatically creates a table with the same name as the model but with an s at the end
 If you mess up with your migration, you can undo the migration (unmigrate), edit the names of your columns in your models file, and re-migrate. Sequelize tracks what files have or haven't already been migrated, so if a model schema has already been migrated, any changes you make to it won't reflect. [How to undo a migration](https://gawdiseattle.gitbook.io/wdi/05-node-express/express-sequelize/05validationsmigrations): `sequelize db:migrate:undo`
 
 
 In index.js: const db = require('./models')
 
-node index.js everytime we want to run our code/make modifications to our model/table.
+`node index.js` everytime we want to run our code/make modifications to our model/table.
 
 // Adding 1:many relationships:
 Update models > .js files > associate for both directions. 
 
-models.user.hasMany(models.pet)
-models.pet.belongsTo(models.user)
+`models.user.hasMany(models.pet)
+models.pet.belongsTo(models.user)`
 
 // Adding many:many relationships:
 `sequelize model:create --name petToy --attributes petId:integer,toyId:integer`
@@ -310,7 +316,7 @@ Using and then running a test file to check that we can query comments off of an
 db.article.findOne({
   where: { id: 1 },
   include: [db.comment]
-}).then(article => {
+}).then(foundArticle => {
   // by using eager loading, the article model should have a comments key
   console.log(article.comments)
   ```
@@ -319,6 +325,11 @@ db.article.findOne({
 
 
 
+# Authentication
+npm i session so we can view our session information
+npm i bcrypt so we can hash passwords
+npm i passport so we can authenticate user logins
+npm i passport-local as our strategy so we can authenticate using local username and password, vs. instead of Google or Facebook, etc.
 
 
 ## Getting Started When Downloading Another Project From Github:
