@@ -332,6 +332,8 @@ npm i passport so we can authenticate user logins
 npm i passport-local as our strategy so we can authenticate using local username and password, vs. instead of Google or Facebook, etc.
 
 
+
+
 ## Getting Started When Downloading Another Project From Github:
 Instructions taken from the [project organizer project](https://github.com/WDI-SEA/express-project-organizer).
 
