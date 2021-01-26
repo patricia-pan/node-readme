@@ -344,3 +344,6 @@ Setup your database (this app already has one existing model)
 Run createdb project_organizer_development to create the database
 Run sequelize db:migrate to run migrations
 Run sequelize db:seed:all to populate the database with 4 projects from previous Seattle cohorts.
+
+
+postgres needs escaping for capitols \d+ "PetToys"
